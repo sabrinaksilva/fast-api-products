@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from app.entities.product import Product
+from app.errors.exceptions.ProductNotFoundException import ProductNotFoundException
 
 class ProductRepository:
     @staticmethod
@@ -8,7 +9,10 @@ class ProductRepository:
 
     @staticmethod
     def get_by_id(db: Session, product_id: int):
-        return db.query(Product).filter(Product.id == product_id).first()
+        product = db.query(Product).filter(Product.id == product_id).first()
+        if not product:
+            raise ProductNotFoundException(product_id)
+        return product
 
     @staticmethod
     def create(db: Session, product: Product):
