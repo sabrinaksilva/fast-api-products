@@ -9,7 +9,6 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Registrar handler para exceção personalizada
 app.add_exception_handler(ProductNotFoundException, product_not_found_exception_handler)
 
 def get_db():
@@ -20,11 +19,11 @@ def get_db():
         db.close()
 
 @app.get("/products")
-def get_products(db: Session = Depends(get_db)):
+def list_products(db: Session = Depends(get_db)):
     return ProductService.get_all_products(db)
 
 @app.get("/products/{product_id}")
-def get_product(product_id: int, db: Session = Depends(get_db)):
+def get_product(product_id: str, db: Session = Depends(get_db)):
     return ProductService.get_product_by_id(db, product_id)
 
 @app.post("/products")
@@ -32,9 +31,9 @@ def create_product(name: str, description: str = None, value: float = 0.0, db: S
     return ProductService.create_product(db, name, description, value)
 
 @app.put("/products/{product_id}")
-def update_product(product_id: int, updated_data: dict, db: Session = Depends(get_db)):
+def update_product(product_id: str, updated_data: dict, db: Session = Depends(get_db)):
     return ProductService.update_product(db, product_id, updated_data)
 
 @app.delete("/products/{product_id}")
-def delete_product(product_id: int, db: Session = Depends(get_db)):
+def delete_product(product_id: str, db: Session = Depends(get_db)):
     return ProductService.delete_product(db, product_id)

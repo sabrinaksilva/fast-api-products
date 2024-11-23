@@ -8,7 +8,7 @@ class ProductService:
         return ProductRepository.get_all(db)
 
     @staticmethod
-    def get_product_by_id(db: Session, product_id: int):
+    def get_product_by_id(db: Session, product_id: str):
         return ProductRepository.get_by_id(db, product_id)
 
     @staticmethod
@@ -17,9 +17,9 @@ class ProductService:
         return ProductRepository.create(db, new_product)
 
     @staticmethod
-    def update_product(db: Session, product_id: int, updated_data: dict):
+    def update_product(db: Session, product_id: str, updated_data: dict):
         return ProductRepository.update(db, product_id, updated_data)
 
     @staticmethod
-    def delete_product(db: Session, product_id: int):
+    def delete_product(db: Session, product_id: str):
         return ProductRepository.delete(db, product_id)

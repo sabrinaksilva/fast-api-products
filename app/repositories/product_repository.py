@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.entities.product import Product
 from app.errors.exceptions.ProductNotFoundException import ProductNotFoundException
+import uuid
 
 class ProductRepository:
     @staticmethod
@@ -8,8 +9,8 @@ class ProductRepository:
         return db.query(Product).all()
 
     @staticmethod
-    def get_by_id(db: Session, product_id: int):
-        product = db.query(Product).filter(Product.id == product_id).first()
+    def get_by_id(db: Session, product_id: str):
+        product = db.query(Product).filter(Product.id == uuid.UUID(product_id)).first()
         if not product:
             raise ProductNotFoundException(product_id)
         return product
@@ -22,8 +23,8 @@ class ProductRepository:
         return product
 
     @staticmethod
-    def update(db: Session, product_id: int, updated_data: dict):
-        product = db.query(Product).filter(Product.id == product_id).first()
+    def update(db: Session, product_id: str, updated_data: dict):
+        product = db.query(Product).filter(Product.id == uuid.UUID(product_id)).first()
         if product:
             for key, value in updated_data.items():
                 setattr(product, key, value)
@@ -32,8 +33,8 @@ class ProductRepository:
         return product
 
     @staticmethod
-    def delete(db: Session, product_id: int):
-        product = db.query(Product).filter(Product.id == product_id).first()
+    def delete(db: Session, product_id: str):
+        product = db.query(Product).filter(Product.id == uuid.UUID(product_id)).first()
         if product:
             db.delete(product)
             db.commit()
