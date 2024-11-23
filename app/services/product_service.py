@@ -12,8 +12,8 @@ class ProductService:
         return ProductRepository.get_by_id(db, product_id)
 
     @staticmethod
-    def create_product(db: Session, name: str, description: str, value: float):
-        new_product = Product(name=name, description=description, value=value)
+    def create_product(db: Session, name: str, description: str, cost_price: float, selling_price: float):
+        new_product = Product(name=name, description=description, cost_price=cost_price, selling_price=selling_price)
         return ProductRepository.create(db, new_product)
 
     @staticmethod

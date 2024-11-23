@@ -8,4 +8,5 @@ class Product(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, index=True, nullable=False)
     name = Column(String, index=True, nullable=False)
     description = Column(String, nullable=True)
-    value = Column(Float, nullable=False)
+    cost_price = Column(Float, nullable=True)
+    selling_price = Column(Float, nullable=False)

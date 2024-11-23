@@ -27,8 +27,8 @@ def get_product(product_id: str, db: Session = Depends(get_db)):
     return ProductService.get_product_by_id(db, product_id)
 
 @app.post("/products")
-def create_product(name: str, description: str = None, value: float = 0.0, db: Session = Depends(get_db)):
-    return ProductService.create_product(db, name, description, value)
+def create_product(name: str, description: str = None, cost_price: float = 0.0, selling_price: float = 0.0, db: Session = Depends(get_db)):
+    return ProductService.create_product(db, name, description, cost_price, selling_price)
 
 @app.put("/products/{product_id}")
 def update_product(product_id: str, updated_data: dict, db: Session = Depends(get_db)):
