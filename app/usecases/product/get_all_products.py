@@ -13,4 +13,7 @@ class GetAllProductsUseCase:
     def execute(self, db: Session, name: Optional[str] = None, description: Optional[str] = None) -> List[
         ProductResponseSchema]:
         products = self.repository.get_all(db, name, description)
+        if (products):
+            print(len(products))
+
         return [ProductResponseSchema.from_orm(product) for product in products]
