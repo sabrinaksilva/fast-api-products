@@ -1,12 +1,15 @@
 from sqlalchemy.orm import Session
-from app.domain.entities.product import Product
+
 from app.adapters.repositories.product_repository import ProductRepository
-from app.adapters.schemas.product_schemas import ProductSaveSchema
+from app.adapters.schemas.product_schemas import ProductSaveSchema, ProductResponseSchema
+from app.domain.entities.product import Product
+
 
 class SaveProductUseCase:
     def __init__(self, repository: ProductRepository):
         self.repository = repository
 
-    def execute(self, db: Session, product_data: ProductSaveSchema) -> Product:
+    def execute(self, db: Session, product_data: ProductSaveSchema) -> ProductResponseSchema:
         new_product = Product(**product_data.dict())
-        return self.repository.create(db, new_product)
+        saved_product = self.repository.create(db, new_product)
+        return ProductResponseSchema.from_orm(saved_product)
