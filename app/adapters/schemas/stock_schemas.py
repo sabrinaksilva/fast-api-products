@@ -22,11 +22,11 @@ class StockSummaryResponse(BaseModel):
 
 class StockResponse(BaseModel):
     summaries: List[StockSummaryResponse]
-    totalValue: Union[float, int]
+    totalValue: float
     totalProducts: int
 
 
     @classmethod
     def from_dao(cls, dao: StockDAO) -> "StockResponse":
         return cls(summaries=[StockSummaryResponse.from_dao(summary) for summary in dao.stock_summaries_daos],
-                   totalValue=dao.total_value, totalProducts=dao.total_products, )
+                   totalValue=round(dao.total_value, 2), totalProducts=dao.total_products, )
