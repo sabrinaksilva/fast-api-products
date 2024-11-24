@@ -25,16 +25,8 @@ The **FastAPI Products API** supports CRUD operations in general, following REST
 - View product listings with **filters**.
 - **Inventory control** to track product quantities.
 
-#### **Cash Flow Management:**
-- Create, view, and edit product entries and exits.
-- View a summary of cash flow movements by period, including:
-  - **Product entries and exits**
-  - **Associated monetary values**
-- View **financial indicators** to support decision-making.
-
-#### **Authentication Flow:**
-- Secure access to system functionalities through authentication control.
-
+- WIP: **Cash Flow Transactions Management:**
+-   Create, view, and edit product entries and exits.
 ---
 
 ## 🚀 **Installation and Setup**
@@ -193,7 +185,29 @@ GRANT ALL PRIVILEGES ON DATABASE product_db TO postgres;
 
 ---
 
-### **8. Run the Application**
+### **8. Run the Application With Docker**
+
+#### **Step 1: Build and Start the Containers**
+Use the following command to build and start the Docker containers:
+```bash
+docker-compose up --build
+```
+This will start the FastAPI application along with the database service defined in the `docker-compose.yml` file.
+
+#### **Step 2: Access the Application**
+Once the containers are running, you can access the application at:
+- **API:** `http://localhost:8000`
+- **API Documentation:** `http://localhost:8000/docs`
+
+#### **Step 3: Stop the Containers**
+To stop the running containers, use:
+```bash
+docker-compose down
+```
+
+---
+
+### **9. Run the Application Without Docker**
 
 Start the FastAPI server using Uvicorn:
 ```bash
@@ -208,24 +222,18 @@ API documentation is available at:
 
 ---
 
-> ⚠️ **To-Do**  
-Docker**
-
-Instructions for setting up and running the application using Docker will be added here.
-
----
-
-## 📚 **Usage**
-
-> ⚠️ **To-Do**  
-Steps on how to use the API and interact with its features will be detailed here.
-
----
-
 ## 🔗 **API Reference**
 
-> ⚠️ **To-Do**  
-The API reference, including endpoints, request and response examples, will be detailed here.
+To explore and interact with the API endpoints, access the Swagger documentation at:
+
+http://localhost:8000/docs
+
+Examples from the Swagger Interface:
+
+![image](https://github.com/user-attachments/assets/cb28fb3a-cfe8-4019-b89f-31e5621c7027)
+![image](https://github.com/user-attachments/assets/8d67712d-a727-41bb-b9d1-c27a58f49aed)
+![image](https://github.com/user-attachments/assets/3ea82d1e-0e9f-4dc5-bcf7-2a68a4f2f703)
+
 
 ---
 
