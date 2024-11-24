@@ -1,0 +1,41 @@
+services:
+  db-products-service:
+    image: postgres:15
+    container_name: db-products-container
+    restart: always
+    environment:
+      POSTGRES_USER: sakappann
+      POSTGRES_PASSWORD: 164143
+      POSTGRES_DB: sigma_products_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  products-api-flask-service:
+    depends_on:
+      - db-products-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: products-api-flask-container
+    restart: always
+    ports:
+      - "8001:8000"
+    environment:
+      DB_USER: sakappann
+      DB_PASSWORD: 164143
+      DB_HOST: db-products-service
+      DB_PORT: 5432
+      DB_NAME: sigma_products_db
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
+    driver: bridge
