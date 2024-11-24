@@ -1,14 +1,7 @@
 from typing import Optional
-from typing import Union
 from uuid import UUID
 
 from pydantic import BaseModel, Field
-
-
-class ProductSummary(BaseModel):
-    id: UUID
-    name: str
-    total_value: Union[float, int]
 
 
 class ProductBaseSchema(BaseModel):

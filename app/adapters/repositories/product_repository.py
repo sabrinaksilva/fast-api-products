@@ -1,20 +1,12 @@
 from typing import List, Optional
 
-from sqlalchemy import or_, sql
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
-from app.adapters.schemas.product_schemas import ProductSummary
 from app.domain.entities.product import Product
 
 
 class ProductRepository:
-
-    @staticmethod
-    def get_summary(db: Session) -> List[ProductSummary]:
-
-        query = db.query(Product.id, Product.name, sql.label("total_value", Product.price * Product.quantity))
-
-        return [ProductSummary(id=prod.id, name=prod.name, total_value=prod.total_value) for prod in query.all()]
 
     @staticmethod
     def get_all(db: Session, name: Optional[str] = None, description: Optional[str] = None) -> List[Product]:
