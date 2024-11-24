@@ -1,4 +1,5 @@
 from pydantic import BaseSettings
+from pathlib import Path
 
 class Settings(BaseSettings):
     db_user: str
@@ -8,6 +9,6 @@ class Settings(BaseSettings):
     db_name: str
 
     class Config:
-        env_file = "app/config/.env"
+        env_file = Path(__file__).parent / ".env"
 
 settings = Settings()

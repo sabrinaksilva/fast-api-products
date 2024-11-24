@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.product import Product
+from app.domain.entities.product import Product
 from typing import List, Optional
 from sqlalchemy import or_
 

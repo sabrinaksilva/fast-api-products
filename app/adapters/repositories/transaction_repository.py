@@ -1,9 +1,9 @@
-from sqlalchemy.orm import Session
 from datetime import date
 from typing import List, Optional
 
-from app.models.transaction import Transaction
-from app.schemas.transaction_schemas import TransactionCreate, TransactionType
+from sqlalchemy.orm import Session
+
+from app.adapters.schemas.transaction_schemas import TransactionCreate, TransactionType
 
 
 class TransactionRepository:
@@ -20,13 +20,9 @@ class TransactionRepository:
         return db.query(Transaction).filter(Transaction.id == transaction_id).first()
 
     @staticmethod
-    def get_all_transactions(
-        db: Session,
-        start_date: Optional[date] = None,
-        end_date: Optional[date] = None,
-        product_id: Optional[str] = None,
-        transaction_type: Optional[TransactionType] = None,
-    ) -> List[Transaction]:
+    def get_all_transactions(db: Session, start_date: Optional[date] = None, end_date: Optional[date] = None,
+            product_id: Optional[str] = None, transaction_type: Optional[TransactionType] = None, ) -> List[
+        Transaction]:
         query = db.query(Transaction)
         if start_date:
             query = query.filter(Transaction.date >= start_date)

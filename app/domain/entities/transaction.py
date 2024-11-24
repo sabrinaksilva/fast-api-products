@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 import uuid
 import enum
 
-from app.config.database import Base
+from app.frameworks.database.database import Base
 
 
 class TransactionType(str, enum.Enum):

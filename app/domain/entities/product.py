@@ -1,7 +1,7 @@
 import uuid
 from sqlalchemy import Column, String, Float
 from sqlalchemy.dialects.postgresql import UUID
-from app.config.database import Base
+from app.frameworks.database.database import Base
 
 class Product(Base):
     __tablename__ = "products"
